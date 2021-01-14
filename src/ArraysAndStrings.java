@@ -10,20 +10,28 @@ public class ArraysAndStrings {
     public static void main(String args[]) {
         System.out.println("Welcome to arrays and strings");
         ArraysAndStrings a = new ArraysAndStrings();
-        System.out.println(a.lengthOfLongestSubstring("abcabcbb"));
-        System.out.println(a.lengthOfLongestSubstring("bbbbbbb"));
-        System.out.println(a.lengthOfLongestSubstring("pwwkew"));
-        System.out.println(a.lengthOfLongestSubstring(" "));
-        System.out.println(a.lengthOfLongestSubstring("a"));
-        System.out.println(a.lengthOfLongestSubstring(" a"));
-        System.out.println(a.lengthOfLongestSubstring("ABDEFGABEF"));
-        System.out.println(a.lengthOfLongestSubstringAlternate("abcabcbb"));
-        System.out.println(a.lengthOfLongestSubstringAlternate("bbbbbbb"));
-        System.out.println(a.lengthOfLongestSubstringAlternate("pwwkew"));
-        System.out.println(a.lengthOfLongestSubstringAlternate(" "));
-        System.out.println(a.lengthOfLongestSubstringAlternate("a"));
-        System.out.println(a.lengthOfLongestSubstringAlternate(" a"));
-        System.out.println(a.lengthOfLongestSubstringAlternate("ABDEFGABEF"));
+//        System.out.println(a.lengthOfLongestSubstring("abcabcbb"));
+//        System.out.println(a.lengthOfLongestSubstring("bbbbbbb"));
+//        System.out.println(a.lengthOfLongestSubstring("pwwkew"));
+//        System.out.println(a.lengthOfLongestSubstring(" "));
+//        System.out.println(a.lengthOfLongestSubstring("a"));
+//        System.out.println(a.lengthOfLongestSubstring(" a"));
+//        System.out.println(a.lengthOfLongestSubstring("ABDEFGABEF"));
+//        System.out.println(a.lengthOfLongestSubstringAlternate("abcabcbb"));
+//        System.out.println(a.lengthOfLongestSubstringAlternate("bbbbbbb"));
+//        System.out.println(a.lengthOfLongestSubstringAlternate("pwwkew"));
+//        System.out.println(a.lengthOfLongestSubstringAlternate(" "));
+//        System.out.println(a.lengthOfLongestSubstringAlternate("a"));
+//        System.out.println(a.lengthOfLongestSubstringAlternate(" a"));
+//        System.out.println(a.lengthOfLongestSubstringAlternate("ABDEFGABEF"));
+//        System.out.println(a.lengthOfLongestSubstringAlternate2("abcabcbb"));
+//        System.out.println(a.lengthOfLongestSubstringAlternate2("bbbbbbb"));
+//        System.out.println(a.lengthOfLongestSubstringAlternate2("pwwkew"));
+//        System.out.println(a.lengthOfLongestSubstringAlternate2(" "));
+//        System.out.println(a.lengthOfLongestSubstringAlternate2("a"));
+        System.out.println(a.lengthOfLongestSubstringAlternate2("abba"));
+        //System.out.println(a.lengthOfLongestSubstringAlternate2("ABDEFGABEF"));
+
 
 
     }
@@ -92,4 +100,32 @@ public class ArraysAndStrings {
 
         return curSlidingWindowLength;
     }
+
+
+    public int lengthOfLongestSubstringAlternate2(String s) {
+        //ABDEFGABEF
+
+        //sanity check
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+
+        //sliding window construction
+        int[] array = new int[128];
+        Arrays.fill(array, -1);
+
+        int slidingWindowStart = 0;
+        int slidingWindowLength = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (array[s.charAt(i)] != -1) {
+                slidingWindowStart = Math.max(slidingWindowStart, array[s.charAt(i)] + 1);
+
+            }
+            slidingWindowLength = Math.max(slidingWindowLength, i - slidingWindowStart + 1);
+            array[s.charAt(i)] = i;
+
+        }
+        return slidingWindowLength;
+    }
+
 }
